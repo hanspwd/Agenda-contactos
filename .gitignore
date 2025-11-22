@@ -1,0 +1,40 @@
+##############################
+#     IntelliJ IDEA
+##############################
+.idea/
+*.iml
+out/
+
+
+##############################
+#     NetBeans
+##############################
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+private.xml
+
+
+##############################
+#     Java / Maven / Gradle
+##############################
+*.class
+*.jar
+*.war
+*.ear
+*.log
+
+target/
+.gradle/
+.gradle-cache/
+!gradle/wrapper/gradle-wrapper.jar
+
+##############################
+#     OS Files
+##############################
+.DS_Store
+Thumbs.db

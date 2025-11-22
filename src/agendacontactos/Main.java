@@ -11,8 +11,12 @@ public class Main {
         Contacto m = new Contacto();
         ContactoView v = new ContactoView();
 
-        ContactoController cController = new ContactoController(m, v);
-        
+        try {
+            ContactoController cController = new ContactoController(m, v);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
     }
     
 }
