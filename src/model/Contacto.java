@@ -1,10 +1,11 @@
 package model;
 
 import dao.ContactoDao;
+import java.util.List;
 
 public final class Contacto {
 
-    private  int id;
+    private int id;
     private String nombre;
     private String apellido;
     private String email;
@@ -13,7 +14,7 @@ public final class Contacto {
     public Contacto() {
     }
 
-    public Contacto(String nombre, String apellido, String email, String telefono) throws Exception{
+    public Contacto(String nombre, String apellido, String email, String telefono) throws Exception {
         this.setNombre(nombre);
         this.setApellido(apellido);
         this.setEmail(email);
@@ -32,11 +33,10 @@ public final class Contacto {
         return nombre;
     }
 
-    public void setNombre(String nombre) throws Exception{  
-        if(!nombre.isBlank() && !nombre.isEmpty()) {
+    public void setNombre(String nombre) throws Exception {
+        if (!nombre.isBlank() && !nombre.isEmpty()) {
             this.nombre = nombre;
-        }
-        else {
+        } else {
             throw new Exception("El nombre no puede estar vacio.");
         }
     }
@@ -45,8 +45,8 @@ public final class Contacto {
         return apellido;
     }
 
-    public void setApellido(String apellido)throws Exception{
-        if(!apellido.isBlank() && !apellido.isEmpty()) {
+    public void setApellido(String apellido) throws Exception {
+        if (!apellido.isBlank() && !apellido.isEmpty()) {
             this.apellido = apellido;
         } else {
             throw new Exception("El apellido no puede estar vacio.");
@@ -57,8 +57,8 @@ public final class Contacto {
         return email;
     }
 
-    public void setEmail(String email) throws Exception{
-        if(!email.isBlank() && !email.isEmpty()) {
+    public void setEmail(String email) throws Exception {
+        if (!email.isBlank() && !email.isEmpty()) {
             this.email = email;
         } else {
             throw new Exception("El email no puede estar vacio.");
@@ -69,8 +69,8 @@ public final class Contacto {
         return telefono;
     }
 
-    public void setTelefono(String telefono) throws Exception{
-        if(!telefono.isBlank() && !telefono.isEmpty()) {
+    public void setTelefono(String telefono) throws Exception {
+        if (!telefono.isBlank() && !telefono.isEmpty()) {
             this.telefono = telefono;
         } else {
             throw new Exception("El telefono no puede estar vacio.");
@@ -80,5 +80,11 @@ public final class Contacto {
     public void crearContacto() throws Exception {
         ContactoDao dao = new ContactoDao();
         dao.create(this);
+    }
+
+    public List<Contacto> listarContactos() throws Exception {
+
+        ContactoDao dao = new ContactoDao();
+        return dao.readAll(); // igual que crearContacto() usa dao.create()
     }
 }

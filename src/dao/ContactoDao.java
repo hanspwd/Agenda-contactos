@@ -1,17 +1,17 @@
 package dao;
 
 import config.Conexion;
+import dao.ICrud;
 import model.Contacto;
-import view.ContactoView;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
-import view.Alerta;
 
 public class ContactoDao implements ICrud<Contacto> {
-
 
     @Override
     public void create(Contacto o) throws SQLException, Exception {
@@ -24,16 +24,36 @@ public class ContactoDao implements ICrud<Contacto> {
         pst.setString(2, o.getApellido());
         pst.setString(3, o.getEmail());
         pst.setString(4, o.getTelefono());
-        
+
         int resultado = pst.executeUpdate();
-        if(resultado == 0 ) {
+        if (resultado == 0) {
             throw new Exception("Ocurrio un error al ingresar los datos.");
         }
     }
 
     @Override
-    public List<Contacto> readAll() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public List<Contacto> readAll() throws SQLException, Exception {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.conectar();
+
+        String query = "SELECT * FROM agenda";
+        PreparedStatement pst = con.prepareStatement(query);
+        ResultSet rs = pst.executeQuery();
+
+        List<Contacto> lista = new ArrayList<>();
+
+        while (rs.next()) {
+            Contacto c = new Contacto(
+                    rs.getString("nombre"),
+                    rs.getString("apellido"),
+                    rs.getString("email"),
+                    rs.getString("telefono")
+            );
+            c.setId(rs.getInt("id"));
+            lista.add(c);
+        }
+
+        return lista;
     }
 
     @Override
@@ -51,5 +71,4 @@ public class ContactoDao implements ICrud<Contacto> {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    
 }
