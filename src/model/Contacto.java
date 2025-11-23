@@ -34,7 +34,7 @@ public final class Contacto {
     }
 
     public void setNombre(String nombre) throws Exception {
-        if (!nombre.isBlank() && !nombre.isEmpty()) {
+        if (!nombre.isBlank()) {
             this.nombre = nombre;
         } else {
             throw new Exception("El nombre no puede estar vacio.");
@@ -46,7 +46,7 @@ public final class Contacto {
     }
 
     public void setApellido(String apellido) throws Exception {
-        if (!apellido.isBlank() && !apellido.isEmpty()) {
+        if (!apellido.isBlank()) {
             this.apellido = apellido;
         } else {
             throw new Exception("El apellido no puede estar vacio.");
@@ -58,7 +58,7 @@ public final class Contacto {
     }
 
     public void setEmail(String email) throws Exception {
-        if (!email.isBlank() && !email.isEmpty()) {
+        if (!email.isBlank()) {
             this.email = email;
         } else {
             throw new Exception("El email no puede estar vacio.");
@@ -70,7 +70,7 @@ public final class Contacto {
     }
 
     public void setTelefono(String telefono) throws Exception {
-        if (!telefono.isBlank() && !telefono.isEmpty()) {
+        if (!telefono.isBlank()) {
             this.telefono = telefono;
         } else {
             throw new Exception("El telefono no puede estar vacio.");

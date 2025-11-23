@@ -16,10 +16,14 @@ public class ContactoDao implements ICrud<Contacto> {
     @Override
     public void create(Contacto o) throws SQLException, Exception {
         Conexion cnx = new Conexion();
-        Connection con = cnx.conectar();
 
-        String query = "INSERT INTO `agenda` (`id`, `nombre`, `apellido`, `email`, `telefono`) VALUES (NULL, ?, ?, ?, ?);";
-        PreparedStatement pst = con.prepareStatement(query);
+        PreparedStatement pst;
+        try (Connection con = cnx.conectar()) {
+
+            String query = "INSERT INTO `agenda` (`id`, `nombre`, `apellido`, `email`, `telefono`) VALUES (NULL, ?, ?, ?, ?);";
+            pst = con.prepareStatement(query);
+        }
+
         pst.setString(1, o.getNombre());
         pst.setString(2, o.getApellido());
         pst.setString(3, o.getEmail());
@@ -27,17 +31,20 @@ public class ContactoDao implements ICrud<Contacto> {
 
         int resultado = pst.executeUpdate();
         if (resultado == 0) {
-            throw new Exception("Ocurrio un error al ingresar los datos.");
+            throw new Exception("Ocurrió un error al ingresar los datos.");
         }
     }
 
     @Override
     public List<Contacto> readAll() throws SQLException, Exception {
         Conexion cnx = new Conexion();
-        Connection con = cnx.conectar();
+        PreparedStatement pst;
 
-        String query = "SELECT * FROM agenda";
-        PreparedStatement pst = con.prepareStatement(query);
+        try (Connection con = cnx.conectar()) {
+
+            String query = "SELECT * FROM agenda";
+            pst = con.prepareStatement(query);
+        }
         ResultSet rs = pst.executeQuery();
 
         List<Contacto> lista = new ArrayList<>();

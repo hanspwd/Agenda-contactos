@@ -35,7 +35,7 @@ public class ContactoController {
         vista.getBtnAgendar().addActionListener((e) -> {
             try {
                 agendar();
-                Alerta.mensaje("Contacto " + modelo.getNombre() + " agregado con exito!", "Operación exitosa", 1);
+                Alerta.mensaje("Contacto " + modelo.getNombre() + " agregado con éxito!", "Operación exitosa", 1);
             } catch (Exception ex) {
                 Alerta.mensaje(ex.getMessage(), "ERROR", 0);
             }
